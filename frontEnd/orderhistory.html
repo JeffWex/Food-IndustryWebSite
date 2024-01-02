@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="admin.css" />
+</head>
+<style>
+    tr input{
+        width: 40px;
+    }
+</style>
+<body>
+    <header>
+        <nav>
+          <form class="navbar">
+            <div>
+              <a href="adminstrator.html">Home</a>
+              <a href="menuPage.html">Menu</a>
+              <a href="userReport.html">Users Report</a>
+              <a href="orderSales.html">Order & Sales</a>
+              <a href="orderhistory.html">Order History</a>
+            </div>
+          </form>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="text-center my-4">Order History</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product ID</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Total Values</th>
+                    <th>Date</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script type="module">
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    const postLoad = (data)=>{
+        console.log(data)
+    }
+    const ratingUpdate = (obj)=>{
+        let loadPromise = new Promise((load,error)=>{
+            const xhr = new XMLHttpRequest();
+            xhr.onload = ()=>{
+                if(xhr.status == 200){
+                    load(xhr.response);
+                }else{
+                    error(xhr.statusText);
+                }
+            }
+            xhr.open("POST","http://localhost/php/fast-food-website/BackEnd/orderhistory.php");
+            xhr.send(JSON.stringify(obj));
+        }).then(postLoad,error)
+    }
+    const ratingBtn = (e,obj)=>{
+        switch(e.target.innerText){
+            case "Add rating":
+                let tr = e.target.parentElement;
+                let input = document.createElement("input");
+                input.type = "number";
+                tr.children[10].append(input);
+                tr.children[11].innerText="Submit";
+                break;
+            case "Submit":
+                let row = e.target.parentElement;
+                let rating = Number(row.children[10].children[0].value);
+                if(rating >= 0 && rating < 6 && rating != ''){
+                    obj.rating = rating;
+                    ratingUpdate(obj);
+                    row.children[10].children[0].remove();
+                    row.children[10].innerText = rating;
+                    row.children[11].innerText="Delete rating";
+                }else{
+                    alert("please input a rating from 0 to 5");
+                }
+                break;
+            case "Delete rating":
+                let trow = e.target.parentElement;
+                obj.rating = null;
+                ratingUpdate(obj);
+                trow.children[10].innerText = null;
+                trow.children[11].innerText="Add rating";
+                break;
+        }
+    }
+    const load = (data)=>{
+        //console.log(data);
+        for(let obj of data){
+            let tr = document.createElement("tr");
+            for(let i in obj){
+                let td = document.createElement("td");
+                td.innerText = obj[i];
+                tr.append(td);
+            }
+            //debugger;
+            let btn = document.createElement("button");
+            btn.className = "btn btn-info";
+            if(obj.rating != null){
+                btn.innerText = "Delete rating";  
+            }else{
+                btn.innerText = "Add rating";
+            }
+            btn.addEventListener("click",(e)=>ratingBtn(e,obj));
+            tr.append(btn);
+            document.querySelector("tbody").append(tr);
+        }
+    }
+    const error = (msg)=>{
+        alert(msg);
+    }
+    let loadPromise = new Promise((load,error)=>{
+        const xhr = new XMLHttpRequest();
+        xhr.onload = ()=>{
+            if(xhr.status == 200){
+                //console.log(JSON.parse(xhr.response));
+                load(JSON.parse(xhr.response));
+            }else{
+                error(xhr.statusText);
+            }
+        }
+        xhr.open("GET","http://localhost/php/fast-food-website/BackEnd/orderhistory.php"+"?userID="+user.id);
+        xhr.send();
+    }).then(load,error)
+</script>
+</html>

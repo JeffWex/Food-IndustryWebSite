@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory/Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="Admin_style.css">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <form class="navbar">
+
+                <div>
+                    <a href="Adm_menu.html">Menu</a>
+                    <a href="Adm_userReport.html">Users Report</a>
+                    <a href="Adm_orderSales.html">Order & Sales</a>
+                </div>
+            </form>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="text-center">Inventory/Menu</h1>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMenuModal">
+            Add Menu
+        </button>
+        <label id="labelName" hidden="true">Name: </label>
+        <input type="text" name="name" id="name" hidden="true">
+
+        <label id="labelAmount" hidden="true">Amount: </label>
+        <input type="number" name="amount" id="amount" hidden="true">
+
+        <label id="labelPrice" hidden="true">Price: </label>
+        <input type="number" name="price" id="price" hidden="true">
+
+
+
+        <button id="updateBtn" hidden="true">Update</button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Food</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Price</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="menuTable">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Menu Modal -->
+    <div class="modal fade" id="addMenuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Menu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addMenuForm">
+                        <div class="form-group">
+                            <label for="food">Product Name</label>
+                            <input type="text" class="form-control" id="food" name="food" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descr">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="addMenuBtn">Add</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="Adm_menu.js"></script>
+</body>
+</html>

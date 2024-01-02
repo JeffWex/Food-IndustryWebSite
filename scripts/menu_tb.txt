@@ -1,0 +1,8 @@
+CREATE TABLE `food_db`.`menu_tb` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `prodName` VARCHAR(75) NOT NULL,
+  `prodDescr` VARCHAR(255) NULL,
+  `quantity` INT NULL,
+  `price` DECIMAL NOT NULL,
+  `food_type` VARCHAR(1) NULL,
+  PRIMARY KEY (`id`));

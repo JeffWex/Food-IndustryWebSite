@@ -1,0 +1,13 @@
+CREATE TABLE `food_db`.`order_tb` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `prod_id` INT NOT NULL,
+  `prodName` VARCHAR(75) NULL,
+  `quantity` INT NOT NULL,
+  `price` DECIMAL(10,2) NULL,
+  `user_id` INT NULL,
+  `user_fname` VARCHAR(50) NULL,
+  `user_lname` VARCHAR(50) NULL,
+  `total_values` DECIMAL(10,2) NULL,
+  `order_date` TIMESTAMP NULL,
+  `rating` INT NUL,
+  PRIMARY KEY (`id`));

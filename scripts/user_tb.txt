@@ -1,0 +1,9 @@
+CREATE TABLE `food_db`.`user_tb` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fname` VARCHAR(50) NULL,
+  `lname` VARCHAR(50) NULL,
+  `mobile` VARCHAR(15) NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `user_type` VARCHAR(1) NULL,
+  PRIMARY KEY (`id`));

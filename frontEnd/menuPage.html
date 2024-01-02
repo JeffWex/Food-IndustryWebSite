@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu Page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <form class="navbar">
+          <div>
+            <a href="adminstrator.html">Home</a>
+            <a href="menuPage.html">Menu</a>
+            <a href="userReport.html">Users Report</a>
+            <a href="orderSales.html">Order & Sales</a>
+            <a href="orderhistory.html">Order History</a>
+          </div>
+        </form>
+      </nav>
+    </header>
+
+    <div class="container">
+      <br />
+      <h1 class="text-center">Menu Page</h1>
+      <button
+        type="button"
+        class="btn btn-success"
+        data-toggle="modal"
+        data-target="#addMenuModal"
+        id="addMenuButton"
+        style="margin-bottom: 15px"
+      >
+        Add Menu
+      </button>
+      <button
+        type="button"
+        class="btn btn-info"
+        id="saveMenuButton"
+        style="margin-bottom: 15px"
+      >
+        Save Menu
+      </button>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Food</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody id="menuTable"></tbody>
+      </table>
+    </div>
+
+    <!-- Add Menu Modal -->
+    <div
+      class="modal fade"
+      id="addMenuModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Menu</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addMenuForm">
+              <div class="form-group">
+                <label for="food">Product Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="food"
+                  name="food"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="amount">Amount</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="amount"
+                  name="amount"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  name="price"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="descr">Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  name="description"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="addMenuBtn">
+              Add
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Menu Modal -->
+    <!-- <div class="modal fade" id="deleteMenuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Menu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="deleteMenuText"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="deleteMenuBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <script src="menu.js"></script>
+  </body>
+  <script>
+    // temporary user information
+    //let userinfo = { userid: 1, username: "Lily", userType: "A" };
+
+    //sessionStorage.setItem("user", JSON.stringify(userinfo));
+    let userObj = JSON.parse(sessionStorage.getItem("user"));
+
+    // if customer logged in, disabled ((add menu button))
+    if (userObj.userType == "C") {
+      $("#addMenuButton").hide();
+      $("#saveMenuButton").show();
+    } else {
+      $("#addMenuButton").show();
+      $("#saveMenuButton").hide();
+    }
+  </script>
+</html>

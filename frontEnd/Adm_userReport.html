@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserReport</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="Admin_style.css">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <form class="navbar">
+                <div>
+                    <a href="Adm_menu.html">Menu</a>
+                    <a href="Adm_userReport.html">Users Report</a>
+                    <a href="Adm_orderSales.html">Order & Sales</a>
+                </div>
+            </form>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="text-center">Users Report</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Mobile Fone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">User Type</th>
+                </tr>
+            </thead>
+            <tbody id="userTable">
+                
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="Adm_userReport.js"></script>
+</body>
+</html>
